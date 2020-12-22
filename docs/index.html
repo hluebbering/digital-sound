@@ -1,0 +1,1555 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Hannah Luebbering" />
+
+<meta name="date" content="2020-08-10" />
+
+<title>Intro to sound and music through basic physics, mathematics, algorithms, fundamental music theory, recorded digital audio, and MIDI</title>
+
+<script src="site_libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+<link rel="stylesheet" href="assets/css/styles2.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Digital Music</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Tutorial</a>
+</li>
+<li>
+  <a href="https://hannahluebbering.shinyapps.io/studyguide3/">MATLAB</a>
+</li>
+<li>
+  <a href="pdf_report.pdf">Project</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Intro to sound and music through basic physics, mathematics, algorithms, fundamental music theory, recorded digital audio, and MIDI</h1>
+<h3 class="subtitle">A Study by Jennifer Burg, Jason Romney, and Eric Schwartz</h3>
+<h4 class="author">Hannah Luebbering</h4>
+<h4 class="date">August 10, 2020</h4>
+
+</div>
+
+
+<hr />
+<div id="part-1.-timing-in-music" class="section level2">
+<h2>Part 1. Timing in Music</h2>
+<div id="learning-objectives" class="section level3">
+<h3>Learning Objectives</h3>
+<style>div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}</style>
+<div class="blue">
+<ol style="list-style-type: decimal">
+<li><p>Be able to explain the meaning of time signatures 4/4, 3/4, 2/3, and 6/8 time.</p></li>
+<li><p>Recognize a measure (also called a bar) on a musical score.</p></li>
+<li><p>Be able to define rhythm.</p></li>
+<li><p>Be able to define tempo.</p></li>
+<li><p>Recognize whole, half, quarter, and eighth notes on a musical score, and know their relative time lengths.</p></li>
+<li><p>Be moderately proficient at recognizing 2/4, 3/4, 4/4, and 6/8 time based on accented beats and groupings of beats.</p></li>
+<li><p>Recognize a melody and be able to hum along with it.</p></li>
+</ol>
+</div>
+<hr />
+</div>
+</div>
+<div id="time-signatures-and-measures" class="section level2">
+<h2>Time signatures and Measures</h2>
+<hr />
+<div id="time-signatures" class="section level3">
+<h3>Time signatures</h3>
+<div style="color: #60c38c">
+<strong>1. Be able to explain the meaning of time signatures 4/4, 3/4, 2/3, and 6/8 time</strong>
+</div>
+<hr />
+<div style="color: #00c7ac">
+<strong>The most common meter is 4/4 time</strong>
+</div>
+<p>Meter is a constant rhythmic pattern for a musical piece defined by…</p>
+<ul>
+<li>how many beats are in a measure</li>
+<li>what type of note gets one beat</li>
+</ul>
+<hr />
+</div>
+<div id="on-a-musical-score-meter-is-denoted-in-the-form-of-a-time-signature" class="section level3">
+<h3>On a musical score, meter is denoted in the form of a time signature</h3>
+<p><strong>time signatures</strong> include 2/4, 3/4, 4/4, 6/8, etc…</p>
+<style>div.lightgreen { background-color:#cdf9e5; border-radius: 5px; padding: 20px;}</style>
+<div class="lightgreen">
+<p>The <strong>numerator</strong> is the number of beats per measure. The <strong>denominator</strong> is the type of note that gets 1 beat.</p>
+<p>For example, a 4/4 time signature means</p>
+<ul>
+<li>there are 4 beats per measure</li>
+<li>a quarter note gets 1 beat</li>
+</ul>
+</div>
+<hr />
+<div style="color: #00c7ac">
+<strong>If you are composing a song in 4/4 time, then you could have </strong>
+</div>
+<ul>
+<li>4 quarter notes in a measure</li>
+<li>1 half note + 2 quarter notes in another</li>
+<li>1 whole note in another</li>
+</ul>
+<hr />
+</div>
+<div id="measures" class="section level3">
+<h3>Measures</h3>
+<div style="color: #ef9ad8">
+<strong>2. Recognize a measure (also called a bar) on a musical score.</strong>
+</div>
+<hr />
+</div>
+<div id="beats-are-gathered-into-groups-called-measures" class="section level3">
+<h3>Beats are gathered into groups called measures</h3>
+<div style="color: #ff8ff8">
+<strong>A beat…</strong>
+</div>
+<p>is a constant pulse that guides the piece’s movement in time</p>
+<div style="color: #ff8ff8">
+<strong>Measures…</strong>
+</div>
+<p>usually consist of 2, 3, 4, or 6 beats, on a musical score— seperated by vertical lines</p>
+<hr />
+</div>
+<div id="three-measures-of-a-musical-score-with-time-signature-44" class="section level3">
+<h3>Three measures of a musical score with time signature 4/4</h3>
+<style>div.hotpink { background-color:#f396e8; border-radius: 5px; padding: 20px;}</style>
+<div class="hotpink">
+<p>First measure has 4 quarter notes</p>
+<ul>
+<li>four quarter notes = four beats</li>
+</ul>
+</div>
+<style>div.lpink { background-color:#fbdaf7; border-radius: 5px; padding: 20px;}</style>
+<div class="lpink">
+<p>The second measure has 2 quarter notes and 1 half note</p>
+<ul>
+<li>add up to four beats – each quarter note getting one beat and each half note getting two beats</li>
+</ul>
+</div>
+<style>div.llpink { background-color:#FDE5FF; border-radius: 5px; padding: 20px;}</style>
+<div class="llpink">
+<p>The third measure has 4 beats</p>
+<ul>
+<li>a whole note has four beats in 4/4 time</li>
+</ul>
+</div>
+<p><img src="assets/images/figure1a.png" style="width:80.0%" /></p>
+<p><strong>Figure 1.</strong> A musical score with three measures using quarter, half, and whole notes</p>
+<hr />
+</div>
+</div>
+<div id="rhythm-and-tempo" class="section level2">
+<h2>Rhythm and Tempo</h2>
+<hr />
+<div style="color:#2fc4e9;">
+<strong>3. Be able to define rhythm.</strong>
+</div>
+<hr />
+<div id="rhythm-is" class="section level3">
+<h3>Rhythm is…</h3>
+<style>div.lightblue { background-color:#d1ecff; border-radius: 5px; padding: 20px;}</style>
+<div class="lightblue">
+<p>A systematic arragnement of musical sounds based on the duration and accent of notes</p>
+<ul>
+<li>usually has a pattern</li>
+<li>arises from the pattern of accented and unaccented notes</li>
+</ul>
+</div>
+<hr />
+</div>
+<div id="rhythm-vs.-meter" class="section level3">
+<h3>Rhythm vs. Meter</h3>
+<div style="color:#7ac8ff;">
+<strong>Meter is the macro-pattern of beats and accents that remains consistent throughout the song</strong>
+</div>
+<p>Once the meter is set for a section of a musical composition, the number of beats per measure must fit within that time signature</p>
+<div style="color:#7ac8ff;">
+<strong>Rhythm is the micro-pattern that gives the song its individuality</strong>
+</div>
+<p>Which particular types of rests and notes – whole, half, quarter, eighth, etc. – are chosen to add up to the number of beats per measure is up to the composer</p>
+<hr />
+</div>
+<div id="the-morse-code" class="section level3">
+<h3>The Morse code</h3>
+<p>Here’s an example of a simple rhythm, the Morse code for SOS</p>
+<p><img src="assets/images/figure2a.png" style="width:60.0%" /></p>
+<p><strong>Figure 2.</strong> The Morse code notated on a musical score – dot, dot, dot, dash, dash, dash, dot, dot, dot</p>
+<hr />
+<p>
+ 
+</p>
+<p>A guitar riff is a rhythm pattern of notes that repeats throughout a song, becoming a musical theme. The notes played in the riff have a repeated rhythm that fits within the meter.</p>
+<p>Some rhythms are patterns of accented beats that are characteristic of a musical genre or the music of a certain culture.</p>
+<p> </p>
+<hr />
+<div style="color:#8779f1;">
+<strong>4. Be able to define tempo.</strong>
+</div>
+<hr />
+</div>
+<div id="tempo-is" class="section level3">
+<h3>Tempo is…</h3>
+<style>div.purple { background-color:#e3d3fd; border-radius: 5px; padding: 20px;}</style>
+<div class="purple">
+<p>the speed of the beats in a musical piece, notated by how many beats there are in 1 minute</p>
+<p>for example, 60 bpm means there are 60 beats per minute</p>
+</div>
+</div>
+<div id="changing-the-tempo-without-changing-the-meter-or-rhythm" class="section level3">
+<h3>Changing the Tempo without changing the meter or rhythm</h3>
+<style>div.lpurple { background-color:#eee5ff; border-radius: 5px; padding: 20px;}</style>
+<div class="lpurple">
+<p>changing the tempo means that the song is played faster or slower, but with</p>
+<ul>
+<li>the same number of beats per measure</li>
+<li>the same type of note getting one beat</li>
+<li>and the same accented beats</li>
+</ul>
+</div>
+<hr />
+<div style="color:#ad85ff;">
+<p><strong>Tempo can be indicated…</strong></p>
+</div>
+<p><strong>numerically</strong> at the beginning of a musical score</p>
+<ul>
+<li>as a suggestion to the performer regarding how fast the piece should be performed</li>
+</ul>
+<hr />
+<p><strong>both manners</strong> of indicating tempo can be included, as shown below</p>
+<p><img src="assets/images/figure3a.png" style="width:50.0%" /></p>
+<hr />
+</div>
+</div>
+<div id="musical-score" class="section level2">
+<h2>Musical score</h2>
+<div style="color:#2f3fe9;">
+<strong>5. Recognize whole, half, quarter, and eighth notes on a musical score, and know their relative time lengths.</strong>
+</div>
+<hr />
+<div id="note-lengths-are-relative-to-eachother" class="section level3">
+<h3>Note lengths are relative to eachother</h3>
+<style>div.bluecloud { background-color:#b3d0ff; border-radius: 5px; padding: 20px;}</style>
+<div class="bluecloud">
+<p><strong>If a quarter note gets 1 beat…</strong></p>
+<ul>
+<li>a half note gets 2 beats</li>
+<li>a whole note gets 4 beats</li>
+<li>an eighth note gets 1/2 beats</li>
+<li>a sixteenth note gets 1/4 beat</li>
+</ul>
+</div>
+<hr />
+</div>
+<div id="difference-between-24-and-44-time" class="section level3">
+<h3>Difference between 2/4 and 4/4 time</h3>
+<p>
+ 
+</p>
+<div style="color:#757aff;">
+<strong>In 2/4 time signature…</strong>
+</div>
+<ul>
+<li>there are 2 beats to a measure,</li>
+<li>and a quarter note gets 1 beat</li>
+</ul>
+<div style="color:#757aff;">
+<strong>In 4/4 time signature…</strong>
+</div>
+<ul>
+<li>there are 4 beats to a measure,</li>
+<li>and a quarter note gets 1 beat</li>
+</ul>
+<p>
+ 
+</p>
+<hr />
+<div style="color:#757aff;">
+<strong>In conclusion,</strong> the difference is based on the phrasing of a song…
+</div>
+<ol style="list-style-type: lower-roman">
+<li>If a commonly repeated sequence of notes requires only 2 beats, then it makes sense to write the song in <strong>2/4 time</strong></li>
+<li>If the phrases or sequences require 4 beats, then it makes sense to write the song in <strong>4/4 time</strong></li>
+</ol>
+<p> </p>
+<hr />
+</div>
+<div id="accented-beats" class="section level3">
+<h3>Accented beats</h3>
+<div style="color:#fa4273;">
+<strong>6. Recognize 2/4, 3/4, 4/4, and 6/8 time based on accented beats and groupings of beats.</strong>
+</div>
+<hr />
+<div id="which-beat-is-accented" class="section level4">
+<h4>Which beat is accented</h4>
+<style>div.orange { background-color:#ffecb3; border-radius: 5px; padding: 20px;}</style>
+<div class="orange">
+<p><strong>Accented</strong> beats are called <em>strong beats</em></p>
+<p><strong>Unaccented</strong> beats are called <em>weak beats</em></p>
+</div>
+<style>div.lorange { background-color:#fff5d6; border-radius: 5px; padding: 20px;}</style>
+<div class="lorange">
+<p>Detecting the meter of the song requires listening for…</p>
+<ul>
+<li>the grouping of beats</li>
+<li>determining which beat is <strong>accented</strong></li>
+</ul>
+</div>
+<p>
+ 
+</p>
+<div style="color:#fa4273;">
+<strong>it is most common in 4/4 meter that…</strong>
+</div>
+<ul>
+<li>the 1st beat in a measure is the accented one</li>
+<li>and the 3rd beat slightly accented, as shown in the figure below</li>
+</ul>
+<p><img src="assets/images/figure6a.png" style="width:30.0%" /></p>
+<p><em>some rhythms are patterns of accented beats that are characteristic of a musical genre or the music of a certain culture</em></p>
+<hr />
+</div>
+<div id="difference-between-34-and-68-time" class="section level4">
+<h4>Difference between 3/4 and 6/8 time</h4>
+<p>the difference lies in the way eighth notes are grouped</p>
+<hr />
+<style>div.redlove { background-color:#fa4273; border-radius: 5px; padding: 20px;}</style>
+<div class="redlove">
+<div style="color:#fff5f9;">
+<strong>In 3/4 time signature…</strong>
+</div>
+</div>
+<p>
+ 
+</p>
+<p>there are 3 beats to a measure, and a quarter note gets 1 beat</p>
+<ul>
+<li>3 quarter notes equal 6 eighth notes</li>
+<li>there are 2 eighth notes in 1 beat</li>
+<li>the eighth notes are in 3 groups of 2 notes each, as shown below</li>
+</ul>
+<div style="color:#ffaa42;">
+<strong>The accent in 3/4 meter is on…</strong>
+</div>
+<p>the 1st beat (eighth note) in the measure, with a lighter accent on the 3rd and 6th eighth notes</p>
+<p><img src="assets/images/figure4a.png" style="width:40.0%" /></p>
+<hr />
+<style>div.redlove { background-color:#fa4273; border-radius: 5px; padding: 20px;}</style>
+<div class="redlove">
+<div style="color:#fff5f9;">
+<strong>In 6/8 time signature…</strong>
+</div>
+</div>
+<p>
+ 
+</p>
+<p>there are 6 beats to a measure, and an eighth note gets 1 beat</p>
+<ul>
+<li>6 eighth notes equals 6 beats</li>
+<li>3 quarter notes equals 6 beats</li>
+<li>eighth notes are in 2 groups of 3</li>
+</ul>
+<div style="color:#ffaa42;">
+<strong>The accent in 6/8 meter…</strong>
+</div>
+<p>falls on the 1st and 4th eighth notes, the second accent being lighter than the first</p>
+<p><img src="assets/images/figure5a.png" style="width:40.0%" /></p>
+<hr />
+</div>
+<div id="in-conclusion" class="section level4">
+<h4>In conclusion…</h4>
+<style>div.lorange { background-color:#fff5d6; border-radius: 5px; padding: 20px;}</style>
+<div class="lorange">
+<p>When comparing a sequence of 6 eigth notes in 3/4 time and 6/8 time, the accents fall in different places.</p>
+<p>For 3/4 time, the accents fall on the 1st, 3rd, and 5th eighth notes in a sequence of 6.</p>
+<p>In 6/8 time they fall on the 1st and 4th eighth notes.</p>
+</div>
+<hr />
+</div>
+</div>
+</div>
+<div id="part-2.-patterns-and-form" class="section level2">
+<h2>Part 2. Patterns and Form</h2>
+<hr />
+<div id="learning-objectives-1" class="section level3">
+<h3>Learning Objectives</h3>
+<p>
+ 
+</p>
+<style>div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}</style>
+<div class="blue">
+<ol style="list-style-type: decimal">
+<li><p>Recognize a melody and be able to hum along with it.</p></li>
+<li><p>Distinguish among monophonic, polyphonic, homophonic, and heterophonic music.</p></li>
+<li><p>List the names and scale degrees of notes in a major diatonic scale.</p></li>
+<li><p>Give examples of tendency notes and common melodic cadences and chord progressions.</p></li>
+<li><p>Be able to give basic definitions of inversion, retrograde, or inverted retrograde as transformations of a melody.</p></li>
+<li><p>Recognize a sequence in a melody.</p></li>
+<li><p>Know the most common chord progressions in contemporary popular and jazz music, by chord numbers.</p></li>
+<li><p>Know how the form of a song can be described by using capital letters A, B, C, ….</p></li>
+<li><p>Know that AABA is referred to as song form, and what this means in terms of sections in the song’s structure.</p></li>
+<li><p>Be able to hear and describe the form of simple songs.</p></li>
+<li><p>Know that 8-bar and 12-bar sections are commonly used in contemporary pop music, jazz, and the blues.</p></li>
+<li><p>Know that the I IV V I and vi ii V I chord progressions are commonly used in pop, blues, and jazz music.</p></li>
+</ol>
+</div>
+<hr />
+</div>
+</div>
+<div id="melody" class="section level2">
+<h2>Melody</h2>
+<div style="color: #60c38c">
+<p><strong>1. Recognize a melody and be able to hum along with it.</strong></p>
+</div>
+<div style="color: #60c38c">
+<p><strong>2. Distinguish among monophonic, polyphonic, homophonic, and heterophonic music.</strong></p>
+</div>
+<hr />
+<div style="color: #00c7ac">
+<strong>A Melody is</strong>
+</div>
+<ul>
+<li>a “rhythmic succession of single tones organized as an aesthetic whole”</li>
+<li>often thought of as the singable or hummable line of a song</li>
+</ul>
+<hr />
+<div id="melodic-texture" class="section level3">
+<h3>Melodic Texture</h3>
+<p>the word “texture” is used to describe how melodies and harmonies are combined in a musical composition</p>
+<hr />
+<style>div.lightgreen { background-color:#cdf9e5; border-radius: 5px; padding: 20px;}</style>
+<div class="lightgreen">
+<strong>Monophony</strong>
+</div>
+<ul>
+<li>the simplest type of texture, which is a single melody in a piece of music</li>
+<li>could be a “tune” sung by a single person or played by a single instrument, or the melody could be played by multiple singers or instruments at the same time</li>
+</ul>
+<hr />
+<style>div.lightgreen { background-color:#cdf9e5; border-radius: 5px; padding: 20px;}</style>
+<div class="lightgreen">
+<strong>Polyphony</strong>
+</div>
+<ul>
+<li>contains two or more melodic lines at the same time, four being the norm</li>
+<li>Johann Sebastian Bach
+<ul>
+<li>composer during 1700s Baroque period of music</li>
+<li>his fugues and canons have multiple lines of melody that blend harmonically in intricate patterns</li>
+</ul></li>
+</ul>
+<hr />
+<style>div.lightgreen { background-color:#cdf9e5; border-radius: 5px; padding: 20px;}</style>
+<div class="lightgreen">
+<strong>Heterophony</strong>
+</div>
+<ul>
+<li>uses simultaneous melodic variants of the same tune</li>
+<li>typical of Middle Eastern music</li>
+<li>in Persian art music, instrumentalists play variants of the singer’s lines</li>
+</ul>
+<hr />
+<style>div.lightgreen { background-color:#cdf9e5; border-radius: 5px; padding: 20px;}</style>
+<div class="lightgreen">
+<strong>Homophony</strong>
+</div>
+<ul>
+<li>standard in Western music and contemporary music</li>
+<li>consists of a melody with harmonic accompaniment</li>
+<li>for examplpe, the saxophone has the lead and is accompanied by other instruments</li>
+<li>occurs in music other than vocal music</li>
+</ul>
+<hr />
+</div>
+</div>
+<div id="note-scale-degrees" class="section level2">
+<h2>Note Scale Degrees</h2>
+<div style="color: #ff5cff">
+<strong>3. List the names and scale degrees of notes in a major diatonic scale.</strong>
+</div>
+<hr />
+<div id="simple-melodies" class="section level3">
+<h3>Simple melodies</h3>
+<p>constructed primarily from the notes of the diatonic scale in the chosen key</p>
+<p>building a musical composition on the <strong>diatonic scale</strong> is a way to help direct the motion of the melody and harmony</p>
+<hr />
+<p><img src="assets/images/figure1.png" style="width:50.0%" /></p>
+<p><strong>Figure 1.</strong> Names a scale degrees of notes in the key of C of a major diatonic scale</p>
+<p>
+ 
+</p>
+</div>
+<div id="diatonic-scale" class="section level3">
+<h3>Diatonic Scale</h3>
+<div style="color: #ff5cff">
+<strong>There are 7 notes in a diatonic scale:</strong>
+</div>
+<p>building a musical composition on the <strong>diatonic scale</strong> is a way to help direct the motion of the melody and harmony; notes can be identified as scale degrees 1-7</p>
+<hr />
+<style>div.lightpink { background-color:#ffe5ff; border-radius: 5px; padding: 20px;}</style>
+<div class="lightpink">
+<strong>Scale degree 1 is the tonic</strong>
+</div>
+<ul>
+<li>note that an octave above is also considered the tonic</li>
+</ul>
+<hr />
+<style>div.lightpink { background-color:#ffe5ff; border-radius: 5px; padding: 20px;}</style>
+<div class="lightpink">
+<strong>Scale degree 5 is called dominant</strong>
+</div>
+<ul>
+<li>because it has such a strong pull toward the tonic</li>
+<li>dominant is an interval of a fifth from the tonic</li>
+</ul>
+<hr />
+<style>div.lightpink { background-color:#ffe5ff; border-radius: 5px; padding: 20px;}</style>
+<div class="lightpink">
+<strong>Scale degree 4 is the subdominant</strong>
+</div>
+<ul>
+<li>subdominant is an interval of a fifth below the tonic</li>
+<li>a semitone away from scale degree 3 (the mediant)</li>
+</ul>
+<hr />
+<style>div.lightpink { background-color:#ffe5ff; border-radius: 5px; padding: 20px;}</style>
+<div class="lightpink">
+<strong>Scale degree 3 is the mediant</strong>
+</div>
+<ul>
+<li>mediant is halfway between the tonic and the dominant</li>
+<li>is a third above the tonic, and the submediant is a third below the tonic</li>
+</ul>
+<hr />
+<style>div.lightpink { background-color:#ffe5ff; border-radius: 5px; padding: 20px;}</style>
+<div class="lightpink">
+<strong>Scale degree 2 is the supertonic</strong>
+</div>
+<ul>
+<li>supertonic is directly above the tonic</li>
+</ul>
+<hr />
+<style>div.lightpink { background-color:#ffe5ff; border-radius: 5px; padding: 20px;}</style>
+<div class="lightpink">
+<strong>Scale degree 7 is called the leading tone</strong>
+</div>
+<ul>
+<li>because it is pulled so strongly toward the note a semitone away</li>
+<li>leading tone is directly below the tonic</li>
+</ul>
+<hr />
+<p>
+ 
+</p>
+<p><strong>Example.</strong> scale up to scale degree 7 and stop in the key of C</p>
+<pre><code>that would be C, D, E, F, G, A, B 
+
+the movement from the leading tone to the tonic (B to C in the key of C) gives a perception of closure -- either stopping or pausing</code></pre>
+<hr />
+</div>
+</div>
+<div id="tendency-tones" class="section level2">
+<h2>Tendency Tones</h2>
+<div style="color: #424fff">
+<strong>4. Give examples of tendency notes and common melodic cadences and chord progressions.</strong>
+</div>
+<hr />
+<div id="tendency-tones-1" class="section level3">
+<h3>Tendency Tones</h3>
+<style>div.lightpurp { background-color:#bdc1ff; border-radius: 5px; padding: 20px;}</style>
+<div class="lightpurp">
+<p>certain tones in the diatonic scale that have a tendency to move to (or be followed by) certain other tones</p>
+<p>this is the basis of what is called tonal music or tonality</p>
+<p>tonal tendencies create points of tension and release as the music moves through time</p>
+</div>
+<hr />
+<p><img src="assets/images/figure2.png" style="width:50.0%" /></p>
+<p><strong>Figure 2.</strong> Movement of Tendency Tones</p>
+<p>Scale degree 4 (subdominant) is a semitone away from scale degree 3 (mediant), “leaning into” the mediant; when a note is on the subdominant, it seems natural to move to the mediant</p>
+<p><strong>Exercise</strong></p>
+<pre><code>Play C, D, E, and F
+
+Then play C, D, E, F, and E 
+
+Does the second sequence sound more &quot;finished&quot; to you than the first? 
+
+Now raise scale degree 4 by a semitone, which in the key of C gives you an F#
+
+This note is pulled strongly toward scale degree 5, which is G in the key of C</code></pre>
+<hr />
+</div>
+<div id="melodic-cadences" class="section level3">
+<h3>Melodic Cadences</h3>
+<style>div.lightpurp { background-color:#bdc1ff; border-radius: 5px; padding: 20px;}</style>
+<div class="lightpurp">
+<p>the feeling of finality or completion that comes from moving from one note to another is called melodic resolution (also called melodic cadence)</p>
+</div>
+<hr />
+<div style="color: #424fff">
+<strong>A melody written with classic tonality</strong>
+</div>
+<p>begins with the tonic moves away from the tonic and creates tension arrives either at the leading tone or at the submediant and resolves the tension by finally moving back to the tonic</p>
+<p>to practice tonality, you should make your melody end either on the supertonic moving to the tonic, or on the leading tone moving to the tonic</p>
+<p>
+ 
+</p>
+<hr />
+<p><strong>In Conclusion,</strong></p>
+<p>notes in a major diatonic scale have names that relate to their positions in the scale and their <strong>tonal tendencies</strong></p>
+<p>example of a song ending on leading tone, tonic; the leading tone is an octave below scale degree 7, but it is still a leading tone: “Minuet in G” by Bach, ending in leading tone to tonic</p>
+<p>
+ 
+</p>
+<hr />
+<div style="color: #424fff">
+<strong>Melodic Contour</strong>
+</div>
+<p>a melody has a contour based on how the pitches go up and down</p>
+<p>the contour of a melody arises in part from the conjunctive and disjunctive moves in a melody</p>
+<style>div.lightpurp { background-color:#bdc1ff; border-radius: 5px; padding: 20px;}</style>
+<div class="lightpurp">
+<p><strong>conjunctive move</strong> is a step from one note to a neighboring note in the tonal collection</p>
+<p><strong>disjunctive move</strong> is a move from one note to a non-neighboring note</p>
+</div>
+<p>the greater the distance between one note and another, the more attention is called to that move</p>
+<hr />
+<p><img src="assets/images/figure3.png" style="width:50.0%" /></p>
+<p><strong>Figure 3.</strong> Tracing the melodic contour of Ode to Joy</p>
+<p>in this piece, you can hear disjunctive moves and (mostly) conjunctive moves; the disjunctive moves tend to stand out more</p>
+<hr />
+</div>
+</div>
+<div id="transformations-and-sequences" class="section level2">
+<h2>Transformations and Sequences</h2>
+<hr />
+<div id="melody-transformations" class="section level3">
+<h3>Melody Transformations</h3>
+<div style="color: #0a9dff">
+<strong>5. Be able to give basic definitions of inversion, retrograde, or inverted retrograde as transformations of a melody.</strong>
+</div>
+<hr />
+<div id="melodic-variations" class="section level4">
+<h4>Melodic Variations</h4>
+<p>to achieve a melodic variation, we use specific techniques, which work by a kind of algorithm, called <strong>melodic transformations</strong></p>
+<style>div.lightblue { background-color:#c7e9ff; border-radius: 5px; padding: 20px;}</style>
+<div class="lightblue">
+<p>Melodic variation is a technique in which an existing melody or theme is repeated and embellished with one or more changes: changing the rhythm or harmony, or adding or changing existing material</p>
+</div>
+<p>
+ 
+</p>
+<p><strong>Three types of melodic transformation:</strong></p>
+<hr />
+<div style="color: #0a9dff">
+<strong>Inversion</strong>
+</div>
+<p>ascending intervals are changed to descending ones and vice versa</p>
+<p>also possible to have an approximate inversion, where the direction is inverted but not the exact number of steps</p>
+<hr />
+<p>Figures below show an <strong>Exact Inversion</strong></p>
+<ol style="list-style-type: lower-roman">
+<li><p>first, 2 measures of a melody are shown, with the semitone steps indicated in the table below it</p></li>
+<li><p>then the inverted melody is shown, with the semitone steps in the table</p></li>
+</ol>
+<p><img src="assets/images/figure5.png" style="width:50.0%" /></p>
+<p><strong>Figure 5.</strong> Movement of original melody</p>
+<p><img src="assets/images/figure6.png" style="width:50.0%" /></p>
+<p><strong>Figure 6.</strong> Melodic inversion</p>
+<p>
+ 
+</p>
+<hr />
+<div style="color: #0a9dff">
+<strong>Retrograde</strong>
+</div>
+<p>notes are played in reverse order</p>
+<hr />
+<div style="color: #0a9dff">
+<strong>Inverted Retrograde</strong>
+</div>
+<p>the inverted melody is played back in reverse order</p>
+<hr />
+<div style="color: #0a9dff">
+<strong>Timing Changes</strong>
+</div>
+<p>one or more notes in a sequence are made longer or shorter in time</p>
+<hr />
+</div>
+</div>
+<div id="melody-sequence" class="section level3">
+<h3>Melody Sequence</h3>
+<div style="color: #0042eb">
+<strong>6. Recognize a sequence in a melody.</strong>
+</div>
+<hr />
+<div id="segments-of-a-melody" class="section level4">
+<h4>Segments of a Melody</h4>
+<p>patterns such as <strong>sequences</strong> and <strong>phrases</strong> are an important part of music</p>
+<hr />
+</div>
+<div id="sequence" class="section level4">
+<h4>Sequence</h4>
+<style>div.lightblue { background-color:#c7e9ff; border-radius: 5px; padding: 20px;}</style>
+<div class="lightblue">
+<p>a small melodic group of notes – as few as two – that can be used repeatedly in a melody, but at different pitch levels higher or lower than the original</p>
+<p>repetitions of the sequence can have exactly the same contour as the original, or they can be varied slightly</p>
+</div>
+<hr />
+<p><strong>Example.</strong> Contour of the melody helps to reveal that the following is a sequence</p>
+<p>First 4 notes have a contour in the way they go up and down, and this contour is repeated at successively lower pitches in the second and third measures</p>
+<p>These 4 notes constitute a sequence</p>
+<p><img src="assets/images/figure4.png" style="width:50.0%" /></p>
+<p><strong>Figure 4.</strong> Sequence in Saint Saens “Aquarium”</p>
+<p>
+ 
+</p>
+<hr />
+</div>
+<div id="phrase" class="section level4">
+<h4>Phrase</h4>
+<style>div.lightblue { background-color:#c7e9ff; border-radius: 5px; padding: 20px;}</style>
+<div class="lightblue">
+<p>a phrase in music is a recognisable musical unit, generally ending in a cadence of some kind, and forming part of a period or sentence</p>
+<p>phrasing in performance indicates the correct grouping of notes, whether as phrases in the technical sense or in smaller distinct units, corresponding to the various possible syntactical uses of punctuation</p>
+</div>
+<hr />
+<p><strong>Example.</strong> Beethoven’s “Ode to Joy” is divided into 4 phrases, each 4 bars long</p>
+<div style="color: #0042eb">
+<strong>Phrase 1</strong>
+</div>
+<ul>
+<li>serves as an antecedent</li>
+<li>doesn’t sound finished because it ends on a tendency note in the key of C – the note D</li>
+<li>D wants to move back to the tonic note C, and since the section ends on D, we feel “left hanging”</li>
+</ul>
+<div style="color: #0042eb">
+<strong>Phrase 2</strong>
+</div>
+<ul>
+<li>does end on C (we’re home again)</li>
+<li>phrase 2 is the consequent of phrase 1</li>
+</ul>
+<div style="color: #0042eb">
+<strong>Phrase 3</strong>
+</div>
+<ul>
+<li>different from Phrases 1 and 2</li>
+</ul>
+<div style="color: #0042eb">
+<strong>Phrase 4</strong>
+</div>
+<ul>
+<li>repetition of the Phrase 2</li>
+<li>wrapping up this section</li>
+</ul>
+<p><img src="assets/images/figure14.png" style="width:30.0%" /></p>
+<p><strong>Figure 5.</strong> Phrases, antecedents, and consequent in Beethoven’s Ode to Joy</p>
+<p>
+ 
+</p>
+<hr />
+</div>
+</div>
+</div>
+<div id="common-chord-progressions" class="section level2">
+<h2>Common Chord Progressions</h2>
+<div style="color: #00946f">
+<strong>7. Know the most common chord progressions in contemporary popular and jazz music, by chord numbers.</strong>
+</div>
+<hr />
+<p>In modern music, a melody is generally accompanied by harmony in the form of chord progressions:</p>
+<ol style="list-style-type: lower-roman">
+<li><p>how chords are built</p></li>
+<li><p>and the way in which chords have tendencies just like notes have tendencies in a melody</p></li>
+</ol>
+<hr />
+<div id="harmony" class="section level3">
+<h3>Harmony</h3>
+<p>a melody consists of single notes, one after another, movement that is shown in a horizontal direction on a musical score</p>
+<p>Harmony…</p>
+<style>div.lightlightgreen { background-color:#b8ffed; border-radius: 5px; padding: 20px;}</style>
+<div class="lightlightgreen">
+<p>involves 2 or more notes played at the same time, as in triad chords</p>
+appears vertically on a musical score, with notes stacked on top of each other to be played simultaneously
+</div>
+<p>
+ 
+</p>
+<hr />
+</div>
+<div id="tertian-harmony" class="section level3">
+<h3>Tertian Harmony</h3>
+<p>Tertian chords…</p>
+<style>div.lightlightgreen { background-color:#b8ffed; border-radius: 5px; padding: 20px;}</style>
+<div class="lightlightgreen">
+<p>created by playing notes separated by intervals of a third – usually 3 or 4</p>
+<p>provide tertian harmony</p>
+examples of tertian chords (both “triad” and “tertian” have prefixes meaning “3”)
+</div>
+<p>
+ 
+</p>
+<hr />
+</div>
+<div id="functional-harmony" class="section level3">
+<h3>Functional Harmony</h3>
+<p>Functional harmony…</p>
+<style>div.lightlightgreen { background-color:#b8ffed; border-radius: 5px; padding: 20px;}</style>
+<div class="lightlightgreen">
+<p>is the tendency for one chord to move to another one (also called tonal)</p>
+<p>tonality applies to both melody and harmony:</p>
+like notes in a major diatonic scale, chords in a key have tendencies toward each other
+</div>
+<hr />
+<p>As described in the section on melody, <strong>tonality</strong> in music is based on the perception that certain notes pull naturally toward certain other notes</p>
+<div style="color: #00946f">
+<strong>In a tonal system,</strong>
+</div>
+<p>the note that pulls most strongly is the tonic note, where the song generally begins and ends the tonic note is the “home note”</p>
+<hr />
+<div style="color: #00946f">
+Like notes…
+</div>
+<ol style="list-style-type: lower-roman">
+<li><p>chords are numbered according to their scale degree, but using Roman numerals</p></li>
+<li><p>chords also have names derived from their bottom note – C major, D minor, E minor, etc</p></li>
+<li><p>in a major diatonic scale, chords are named according to their tendencies relative to other chords</p></li>
+</ol>
+<hr />
+</div>
+<div id="chord-names-based-on-scale-degree" class="section level3">
+<h3>Chord names based on scale degree:</h3>
+<style>div.lightlightgreen { background-color:#b8ffed; border-radius: 5px; padding: 20px;}</style>
+<div class="lightlightgreen">
+<p>Chord I is the tonic</p>
+<p>Chord II is the supertonic</p>
+<p>Chord III is the mediant</p>
+<p>Chord IV is the subdominant (also called the predominant)</p>
+<p>Chord V is the dominant</p>
+<p>Chord VI is the submediant</p>
+<p>Chord VII is the leading chord</p>
+</div>
+<hr />
+<p><img src="assets/images/figure7.png" style="width:50.0%" /></p>
+<p><strong>Figure 7.</strong> Triad chords in the key of C major, named and numbered</p>
+<p><em>Note, in the tutorial’s first figure, we see notes in the C major diatonic scale numbered according to scale degree</em></p>
+<p>
+ 
+</p>
+<hr />
+</div>
+<div id="the-dominant-seventh-chord" class="section level3">
+<h3>The Dominant Seventh Chord</h3>
+<p>so far, we’ve looked at triads – chords with 3 notes</p>
+<p>Four-note chords…</p>
+<style>div.lightlightgreen { background-color:#b8ffed; border-radius: 5px; padding: 20px;}</style>
+<div class="lightlightgreen">
+<p>the dominant 7th is one of the most frequently used</p>
+<p>most common in jazz and blues music</p>
+all dominant seventh chords contain 4 notes
+</div>
+<hr />
+<p><img src="assets/images/figure8.png" style="width:50.0%" /></p>
+<p><strong>Figure 8.</strong> Dominant seventh chord</p>
+<hr />
+<div style="color: #00946f">
+Other dominant seventh chords:
+</div>
+<ol style="list-style-type: lower-roman">
+<li><p>minor/major seventh</p></li>
+<li><p>half-diminished seventh</p></li>
+<li><p>fully diminished seventh</p></li>
+<li><p>augmented major seventh</p></li>
+<li><p>augmented seventh</p></li>
+</ol>
+<hr />
+</div>
+<div id="chord-cadences-chord-progressions-and-harmonic-resolution" class="section level3">
+<h3>Chord Cadences, Chord Progressions, and Harmonic Resolution</h3>
+<p>Returning to the concept of <strong>functional harmony</strong>…</p>
+<hr />
+<p>A cadence…</p>
+<style>div.lighttblue { background-color:#a8fbff; border-radius: 5px; padding: 20px;}</style>
+<div class="lighttblue">
+<p>is a melodic and/or harmonic progression that creates a sense of completion, called resolution</p>
+<p>similar a comma or a period in a sentence</p>
+function can be to slow down a melody or section of music, end it, or prepare for a transition to more musical material
+</div>
+<hr />
+<p>A melodic cadence…</p>
+<style>div.lighttblue { background-color:#a8fbff; border-radius: 5px; padding: 20px;}</style>
+<div class="lighttblue">
+consists of at least 2 notes
+</div>
+<hr />
+<p>A harmonic cadence</p>
+<style>div.lighttblue { background-color:#a8fbff; border-radius: 5px; padding: 20px;}</style>
+<div class="lighttblue">
+<p>consists of at least 2 chords that bring a section of music to a close or a pause</p>
+can also be called a chord cadence
+</div>
+<hr />
+</div>
+</div>
+<div id="form-of-a-song" class="section level2">
+<h2>Form of a Song</h2>
+<div style="color: #ff7f0f">
+<strong>8. Know how the form of a song can be described by using capital letters.</strong>
+</div>
+<div style="color: #ff7f0f">
+<strong>9. Know that AABA is referred to as song form, and what this means in terms of sections in the song’s structure.</strong>
+</div>
+<hr />
+<div id="tonal-music" class="section level3">
+<h3>Tonal Music</h3>
+<p>most of the discussion above has been based upon tonal music</p>
+<p>In tonal music…</p>
+<style>div.orange { background-color:#ffe4cc; border-radius: 5px; padding: 20px;}</style>
+<div class="orange">
+<p>songs are written in a particular key that defines a tonal center, and tension is created and resolved as the melody or chords move away from and return to the tonal center</p>
+</div>
+</div>
+<div id="atonality" class="section level3">
+<h3>Atonality</h3>
+<p>Atonal music, on the other hand,</p>
+<style>div.orange { background-color:#ffe4cc; border-radius: 5px; padding: 20px;}</style>
+<div class="orange">
+<p>is purposely composed without a tonal center (no key)</p>
+<p>this genre of music rose in prominence at the beginning of the 20th century with composers such as Arnold Schoenberg and Anton Webern</p>
+</div>
+<p>
+ 
+</p>
+<hr />
+</div>
+<div id="form-of-a-musical-composition" class="section level3">
+<h3>Form of a Musical Composition</h3>
+<div style="color: #ff7f0f">
+<strong>Analyzing Musical Form with ABCs</strong>
+</div>
+<p>Annotating musical compositions, the <strong>letter</strong>…</p>
+<style>div.orange { background-color:#ffe4cc; border-radius: 5px; padding: 20px;}</style>
+<div class="orange">
+<p>A stands for a cohesive phrase or phrases or longer segment of music–a section of a certain nature, determined primarily by the melodic and harmonic progression in that part</p>
+<p>B stands for a contrasting cohesive phrase or phrases – a section or with a different melody or harmony. The bottom line for this section is for you to “hear” the changes in sections – like paragraphs in music</p>
+</div>
+<hr />
+</div>
+<div id="aaba-form" class="section level3">
+<h3>AABA Form</h3>
+<p>A common form for pop and jazz songs – actually known as song form – is AABA</p>
+<style>div.orange { background-color:#ffe4cc; border-radius: 5px; padding: 20px;}</style>
+<div class="orange">
+<p>this form consists of 4 sections, each 8 measures long</p>
+<p>it can also be called the 32-bar form</p>
+</div>
+<p><strong>AABA Example.</strong> “Deck the Halls” in the AABA form</p>
+<p>A: Deck the halls with boughs of holly, fa la la la la la la la la</p>
+<p>A: Tis the season to be jolly, fa la la la la la la la la</p>
+<p>B. Don we now our gay apparel, fa la la la la la la la la</p>
+<p>A: Troll the ancient yuletide carol, fa la la la la la la la la</p>
+<p>
+ 
+</p>
+<hr />
+<p>There can be differences of opinion in analyzing the form of a song; some might say A and A’ are the same, which would make this form AABA; others might say the first and second phrases are different and call the form ABCB</p>
+<p><strong>overall idea is that phrases are not randomly different from each other</strong></p>
+<hr />
+</div>
+<div id="simple-songs" class="section level3">
+<h3>Simple Songs</h3>
+<div style="color: #ff0a50">
+<strong>10. Be able to hear and describe the form of simple songs.</strong>
+</div>
+<hr />
+<div id="versechorus-form" class="section level4">
+<h4>Verse/Chorus Form</h4>
+<style>div.lightred { background-color:#ffadc5; border-radius: 5px; padding: 20px;}</style>
+<div class="lightred">
+<p>standard song form built around 2 repeating and alternating sections</p>
+<p>form commonly consists of <strong>verse, chorus</strong> (with more verse/chorus pairs)</p>
+<p>variation of the verse/chorus form is <strong>verse, chorus, verse, chorus, bridge, chorus</strong></p>
+</div>
+<hr />
+<div style="color: #ff0a50">
+Repeated Verses
+</div>
+<ul>
+<li>usually all have the same melody</li>
+<li>but they have different lyrics from one verse to the next</li>
+</ul>
+<div style="color: #ff0a50">
+Chorus
+</div>
+<ul>
+<li>on the other hand, generally has the same words and music in each repetition</li>
+<li>contains the song’s melodic motifs and lyrical refrains</li>
+<li>usually the most memorable part of the song</li>
+</ul>
+<div style="color: #ff0a50">
+Bridges
+</div>
+<ul>
+<li>are a section of the song that provides a musical contrast to the rest</li>
+<li>may have a key, meter, or tempo change, or different chord progressions</li>
+</ul>
+<hr />
+<p>To give the song coherence, the chorus returns to the original musical and lyrical themes at the end. Structure can get even more complicated, as in Coldplay’s song “Fix You” which contains <em>verse-verse-chorus-verse-chorus-bridge-bridge-chorus</em></p>
+<p> </p>
+<hr />
+</div>
+</div>
+<div id="bar-and-12-bar-sections" class="section level3">
+<h3>8-bar and 12-bar Sections</h3>
+<div style="color: #ff75e3">
+<strong>11. Know that 8-bar and 12-bar sections are commonly used in contemporary pop music, jazz, and the blues.</strong>
+</div>
+<hr />
+<div id="bar" class="section level4">
+<h4>12-bar</h4>
+<p>The Blues form…</p>
+<style>div.lightyellow { background-color:#ffd6f7; border-radius: 5px; padding: 20px;}</style>
+<div class="lightyellow">
+<p>is another standard form of chord progression</p>
+<p>uses 12-bar sections with a lot of repetition of chord progressions</p>
+<p>relying heavily on the I IV V7 I chord progression</p>
+</div>
+<hr />
+<div style="color: #ff75e3">
+<strong>Here’s a common progression for 12-bar blues…</strong>
+</div>
+<p><img src="assets/images/figure11.png" style="width:50.0%" /></p>
+<p><strong>Figure 11.</strong> Blues chord progression using Roman numerals</p>
+<hr />
+<div style="color: #ff75e3">
+<strong>Here’s a different blues chord progression in the key of C…</strong>
+</div>
+<p>Notated with lettered chord names rather than by Roman numerals</p>
+<ol style="list-style-type: lower-roman">
+<li><p>this type of chord notation is called a <strong>lead sheet</strong></p></li>
+<li><p>example is different from the previous one because second measure is a I chord rather than a IV</p></li>
+<li><p>C chord (CEGB) and the F chord (FACE), as 4-note chords, have 2 common tones – C and E</p></li>
+</ol>
+<p><img src="assets/images/figure12.png" style="width:50.0%" /></p>
+<p><strong>Figure 12.</strong> Lead sheet for a blues chord progression</p>
+<hr />
+<div style="color: #ff75e3">
+<strong>Following examples show dominant 7th chords used in blues chord progressions…</strong>
+</div>
+<p><img src="assets/images/figure13.png" style="width:50.0%" /></p>
+<p><strong>Figure 13.</strong> Lead sheet for a blues chord progression with all chords being dominant 7th chords</p>
+<p><img src="assets/images/figure13b.png" style="width:50.0%" /></p>
+<p><strong>Figure 13b.</strong> Lead sheet symbols for blues chord progressions in the key of F with a few added chords for decoration</p>
+<hr />
+</div>
+</div>
+<div id="i-iv-v-i-chord-progression" class="section level3">
+<h3>I IV V I Chord Progression</h3>
+<div style="color: #00aeb8">
+<strong>12. Know that the I IV V I and vi ii V I chord progressions are commonly used in pop, blues, and jazz music.</strong>
+</div>
+<hr />
+<p>A sequence…</p>
+<style>div.lighttblue { background-color:#a8fbff; border-radius: 5px; padding: 20px;}</style>
+<div class="lighttblue">
+<p>A sequence of more than two chords is called a chord progression</p>
+Common chord progression is <strong>I IV V I</strong>
+</div>
+<ol style="list-style-type: lower-roman">
+<li><p>common in Classical music, contemporary popular music, and the blues</p></li>
+<li><p>most contemporary popular music uses primarily the I IV V I progression</p></li>
+</ol>
+<hr />
+<p><img src="assets/images/figure9.png" style="width:50.0%" /></p>
+<p><strong>Figure 9.</strong> I IV V I chord progression</p>
+<hr />
+<div style="color: #00aeb8">
+Voice Leading
+</div>
+<p>Why didn’t we put chords in root position, in which notes are a 3rd apart?</p>
+<ul>
+<li>want to have notes that are common between chords, and notes that move by only a step</li>
+<li>the way a note moves to the following note</li>
+<li>notice how the D goes up to the E and the B resolves to the C in the V-I progression <em>as shown by the arrows</em></li>
+</ul>
+<hr />
+<div id="chord-ladder" class="section level4">
+<h4>Chord Ladder</h4>
+<p>How chords relate to each other in a sequence that goes from a leading chord, through various types of musical tension, to resolution at the tonic:</p>
+<style>div.lighttblue { background-color:#a8fbff; border-radius: 5px; padding: 20px;}</style>
+<div class="lighttblue">
+<p>Chords V and vii tend to be followed by I or vi</p>
+<p>Chords ii and IV tend toward V or vii</p>
+<p>Chord vi tends toward chords ii or IV</p>
+Chord iii tends toward vi
+</div>
+<hr />
+<div style="color: #00aeb8">
+Method to find a chord progression that follows functional harmony…
+</div>
+<ol style="list-style-type: lower-roman">
+<li><p>start anywhere in the ladder and move down</p></li>
+<li><p>or start on I, then move to anywhere in the ladder and go down from there</p></li>
+</ol>
+<hr />
+<p><img src="assets/images/figure10.png" style="width:50.0%" /></p>
+<p><strong>Figure 10.</strong> Chord Ladder showing common chord progressions moving through time</p>
+<hr />
+<p><strong>Chord progression I IV V I</strong> is in keeping with functional harmony</p>
+<p>More chord progressions you can derive from the ladder are…</p>
+<ol style="list-style-type: lower-alpha">
+<li><p><strong>ii V I</strong></p></li>
+<li><p><strong>vi ii V I</strong></p></li>
+</ol>
+<p>these are the most common chord progressions in jazz</p>
+<hr />
+<div style="color: #00aeb8">
+<strong>Notice in the chord ladder</strong> that there are rows where you have a choice between 2 chords in the chord progression…
+</div>
+<ol style="list-style-type: lower-roman">
+<li>ii and IV, V and vii, and I and VI</li>
+<li>these pairs of chords can “substitute for” each other</li>
+<li>each of these pairs of chords have 2 common notes</li>
+<li>this gives them a similarity which makes them interchangeable</li>
+</ol>
+<hr />
+<p>Not all popular chord progressions follow the Chord Ladder</p>
+<p>Varying slightly is <strong>I V vi IV I</strong></p>
+<ul>
+<li>a chord progression used by the Beatles “Let it Be”</li>
+<li>the root of each chord descends by a fifth</li>
+</ul>
+<p>
+ 
+</p>
+<hr />
+</div>
+</div>
+</div>
+<div id="references" class="section level2 unnumbered">
+<h2 class="unnumbered">References</h2>
+<div id="refs" class="references hanging-indent">
+<div id="ref-DigitalSoundAndMusic">
+<p>Burg Jennifer, Romney Jason, and Schwartz Eric. 2016. <em>Digital Sound &amp; Music: Concepts, Applications, and Science</em>. Book. Franklin, Beedle &amp; Associates Inc. <a href="http://digitalsoundandmusic.com">http://digitalsoundandmusic.com</a>.</p>
+</div>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
