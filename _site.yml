@@ -1,0 +1,10 @@
+name: "Digital Music"
+navbar:
+  title: "Digital Music"
+  left:
+    - text: "Tutorial"
+      href: index.html
+    - text: "MATLAB"
+      href: https://hannahluebbering.shinyapps.io/studyguide3/
+    - text: "Project"
+      href: pdf_report.pdf
